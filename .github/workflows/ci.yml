@@ -10,43 +10,16 @@ on:
 
 jobs:
   build:
-    name: Run Fastlane Hello World
-    runs-on: macos-latest # Use macOS for iOS builds (you can use ubuntu-latest for Android only)
+    name: <Enter the pipeline >
+    runs-on: macos-latest # Which os you should put here?
 
     steps:
-      # 1. Checkout the repository
-      - name: 📥 Checkout code
-        uses: actions/checkout@v3
+      # 1. How the pipeline know how to run which code?
+      - name: 'What you should do here?'
+        uses: <something>
 
-      # 2. Set up Node.js
-      - name: 🔧 Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18' # Specify Node version
+        # 2. What dependencies you should install for building apps?
 
-      # 3. Set up Java for Android builds
-      - name: ☕ Set up Java
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin'
-          java-version: '17' # Java version for Android builds
+        # 3. How you are going to build your app?
 
-      # 4. Set up Ruby for Fastlane
-      - name: 💎 Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.2' # Use a compatible Ruby version for Fastlane
-
-      # 5. Install dependencies
-      - name: 📦 Install dependencies
-        run: |
-          npm install
-          gem install bundler
-          bundle install
-
-      # 6. Run Fastlane (Hello World lane)
-      - name: 🚀 Run Fastlane for iOS
-        run: bundle exec fastlane ios hello_world
-
-      - name: 🚀 Run Fastlane for Android
-        run: bundle exec fastlane android hello_world
+        # 4. How we use Fastlane to deploy our apps?
