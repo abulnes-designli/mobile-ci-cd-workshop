@@ -1,0 +1,52 @@
+name: React Native CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Run Fastlane Hello World
+    runs-on: macos-latest # Use macOS for iOS builds (you can use ubuntu-latest for Android only)
+
+    steps:
+      # 1. Checkout the repository
+      - name: 📥 Checkout code
+        uses: actions/checkout@v3
+
+      # 2. Set up Node.js
+      - name: 🔧 Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18' # Specify Node version
+
+      # 3. Set up Java for Android builds
+      - name: ☕ Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17' # Java version for Android builds
+
+      # 4. Set up Ruby for Fastlane
+      - name: 💎 Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2' # Use a compatible Ruby version for Fastlane
+
+      # 5. Install dependencies
+      - name: 📦 Install dependencies
+        run: |
+          npm install
+          gem install bundler
+          bundle install
+
+      # 6. Run Fastlane (Hello World lane)
+      - name: 🚀 Run Fastlane for iOS
+        run: bundle exec fastlane ios hello_world
+
+      - name: 🚀 Run Fastlane for Android
+        run: bundle exec fastlane android hello_world
